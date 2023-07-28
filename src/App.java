@@ -1,16 +1,27 @@
+import java.util.Scanner;
+
 public class App {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Jogo da Velha!");
-        exibirJogo();
-    }
 
     private static final char campoLivre = ' ';
+    private static final char JOGADOR_1 = 'X';
+    private static final char JOGADOR_2 = 'O';
+
+    private static Integer linha = 0;
+    private static Integer coluna = 0;
+    private static Boolean jogada = true;
+    private static final Scanner scanner = new Scanner(System.in);
 
     private static final char[][] jogo = {
             { campoLivre, campoLivre, campoLivre },
             { campoLivre, campoLivre, campoLivre },
-            { campoLivre, campoLivre, campoLivre }
-    };
+            { campoLivre, campoLivre, campoLivre } };
+
+    public static void main(String[] args) {
+        exibirJogo();
+        escolherJogada(scanner);
+        fazerJogada(JOGADOR_2);
+
+    }
 
     public static void exibirJogo() {
         int linha = 1;
@@ -23,11 +34,32 @@ public class App {
                     System.out.print(linha);
                     linha++;
                 }
-                System.out.print(" |" + (jogo[i][j]) + jogo[i][j]);
+                System.out.print(" | " + jogo[i][j]);
             }
             System.out.println(" |");
         }
         System.out.println("  -------------");
     }
 
+    public static void escolherJogada(Scanner scanner) {
+        System.out.print("Escolha a linha - " + jogada(jogada) + ": ");
+        linha = scanner.nextInt();
+
+        System.out.print("Escolha a coluna - " + jogada(jogada) + ": ");
+        coluna = scanner.nextInt();
+    }
+
+    public static boolean fazerJogada(char jogada) {
+        if (jogo[linha - 1][coluna - 1] == campoLivre) {
+            jogo[linha - 1][coluna - 1] = jogada;
+            return true;
+        } else {
+            System.out.println("JOGADA INVÁLIDA.");
+            return false;
+        }
+    }
+
+    public static char jogada(Boolean jogada) {
+        return jogada ? JOGADOR_1 : JOGADOR_2;
+    }
 }
