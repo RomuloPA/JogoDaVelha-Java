@@ -62,4 +62,61 @@ public class App {
     public static char jogada(Boolean jogada) {
         return jogada ? JOGADOR_1 : JOGADOR_2;
     }
+
+    public static char vencedor() {
+        int linha;
+        int coluna;
+        int diagonal1;
+        int diagonal2;
+        char resultado;
+
+        for (int i = 0; i <= 2; i++) {
+            linha = jogo[i][0] + jogo[i][1] + jogo[i][2];
+            if ((resultado = validarVencedor(linha)) != campoLivre) {
+                return resultado;
+            }
+        }
+
+        for (int j = 0; j <= 2; j++) {
+            coluna = jogo[0][j] + jogo[1][j] + jogo[2][j];
+            if ((resultado = validarVencedor(coluna)) != campoLivre) {
+                return resultado;
+            }
+        }
+
+        diagonal1 = jogo[0][0] + jogo[1][1] + jogo[2][2];
+        if ((resultado = validarVencedor(diagonal1)) != campoLivre) {
+            return resultado;
+        }
+
+        diagonal2 = jogo[2][0] + jogo[1][1] + jogo[0][2];
+        if ((resultado = validarVencedor(diagonal2)) != campoLivre) {
+            return resultado;
+        }
+
+        int empate = 0;
+        for (int i = 0; i <= 2; i++) {
+            for (int j = 0; j <= 2; j++) {
+                if (jogo[i][j] != campoLivre)
+                    empate += 1;
+            }
+        }
+
+        /*
+         * if (empate >= 9)
+         * resultado = EMPATE;
+         */
+
+        return resultado;
+    }
+
+    public static char validarVencedor(Integer valor) {
+        if (valor == 264)
+            return JOGADOR_1;
+
+        if (valor == 237)
+            return JOGADOR_2;
+
+        return campoLivre;
+    }
 }
