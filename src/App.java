@@ -5,10 +5,12 @@ public class App {
     private static final char campoLivre = ' ';
     private static final char JOGADOR_1 = 'X';
     private static final char JOGADOR_2 = 'O';
+    private static final char EMPATE = 'E';
 
     private static Integer linha = 0;
     private static Integer coluna = 0;
     private static Boolean jogada = true;
+    private static char vencedor = campoLivre;
     private static final Scanner scanner = new Scanner(System.in);
 
     private static final char[][] jogo = {
@@ -102,10 +104,8 @@ public class App {
             }
         }
 
-        /*
-         * if (empate >= 9)
-         * resultado = EMPATE;
-         */
+        if (empate >= 9)
+            resultado = EMPATE;
 
         return resultado;
     }
@@ -118,5 +118,25 @@ public class App {
             return JOGADOR_2;
 
         return campoLivre;
+    }
+
+    public static void mostrarVencedor() {
+        if (vencedor == EMPATE)
+            System.out.println("######### JOGO EMPATADO #########");
+        else
+            System.out.println("######### JOGO ACABOU. O VENCEDOR É '" + vencedor + "' #########");
+    }
+
+    public static void resetarJogo() {
+        for (int i = 0; i <= 2; i++) {
+            for (int j = 0; j <= 2; j++) {
+                jogo[i][j] = campoLivre;
+            }
+        }
+
+        linha = 0;
+        coluna = 0;
+        jogada = true;
+        vencedor = campoLivre;
     }
 }
