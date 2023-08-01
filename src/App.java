@@ -19,10 +19,36 @@ public class App {
             { campoLivre, campoLivre, campoLivre } };
 
     public static void main(String[] args) {
-        exibirJogo();
-        escolherJogada(scanner);
-        fazerJogada(JOGADOR_2);
+        try {
+            limparTela();
+            while (mostrarMenu(scanner) != 2) {
+                do {
+                    limparTela();
+                    exibirJogo();
+                    escolherJogada(scanner);
 
+                    if (!fazerJogada(jogada(jogada)))
+                        continue;
+
+                    jogada = !jogada;
+                } while ((vencedor = vencedor()) == campoLivre);
+
+                limparTela();
+                mostrarVencedor();
+                exibirJogo();
+                resetarJogo();
+
+                System.out.println("Pressione uma tecla para continuar...");
+                System.in.read();
+
+                limparTela();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println("######### SAIU DO JOGO #########");
+        scanner.close();
     }
 
     public static int mostrarMenu(Scanner scanner) {
