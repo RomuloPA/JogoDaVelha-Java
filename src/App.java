@@ -25,6 +25,14 @@ public class App {
 
     }
 
+    public static int mostrarMenu(Scanner scanner) {
+        System.out.println("######### JOGO DA VELHA #########");
+        System.out.println("1 - JOGAR");
+        System.out.println("2 - SAIR");
+        System.out.print("Escolha uma opção: ");
+        return scanner.nextInt();
+    }
+
     public static void exibirJogo() {
         int linha = 1;
 
